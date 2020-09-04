@@ -20,7 +20,7 @@ const RandomNumber = require('./lib/RandomNumber');
 const DomainManager = require('./lib/DomainManager');
 const ens = require('./utils/ens');
 const utils = require('./utils/utils');
-const constants = require('constants.json');
+const constants = require('./constants.json');
 
 module.exports = {
   KeyPair,
