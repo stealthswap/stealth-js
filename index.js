@@ -17,7 +17,7 @@
 
 const KeyPair = require('./lib/ECKeyPair');
 const RandomNumber = require('./lib/RandomNumber');
-const DomainManager = require('./lib/DomainManager');
+const ENSManager = require('./lib/ENSManager');
 const ens = require('./utils/ens');
 const utils = require('./utils/utils');
 const constants = require('./constants.json');
@@ -25,7 +25,7 @@ const constants = require('./constants.json');
 module.exports = {
   KeyPair,
   RandomNumber,
-  DomainManager,
+  ENSManager,
   ens,
   utils,
   constants,

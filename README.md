@@ -23,11 +23,10 @@ const stealth = require('stealthswap-js');
 // utils and ens are not used below, but their APIs can be found in utils.js and ens.js
 const { RandomNumber, KeyPair, utils, ens } = stealth
 
-// Setup ----------------------------------------------------------------------
-// Generate a random wallet to simulate the recipient
+// Generate a test wallet for the recipient
 wallet = ethers.Wallet.createRandom();
 
-// Sender ---------------------------------------------------------------------
+// Sender Phase
 // Get a random 32-byte number
 const randomNumber = new RandomNumber();
 

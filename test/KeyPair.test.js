@@ -36,8 +36,8 @@ describe('KeyPair class', () => {
 
   it('initializes an instance from a regular transaction', async () => {
     // Specify mainnet transaction hash and its sender
-    const txHash = '0x9395a3fcb8a9ab1336f14258c9555a5c7bcf3f31fc3eb4b6d19114362e745f8d';
-    const from = '0x60a5dcb2fc804874883b797f37cbf1b0582ac2dd';
+    const txHash = '0xf2225f839ec0c70a944db242918311a26a230e2db3cb8d1aeaf5d50018a80444';
+    const from = '0x75268517cA98858ABf8a1B0cFDa31b6dF9E2BBce';
     // Create instance and check result
     const keyPair = await KeyPair.instanceFromTransaction(txHash, provider);
     expect(keyPair.address).to.equal(from);
@@ -95,7 +95,7 @@ describe('KeyPair class', () => {
       wallet = ethers.Wallet.createRandom();
       // Encrypt payload
       const number = new RandomNumber();
-      const payload = `umbra-protocol-v0${number.asHex}`;
+      const payload = `stealth-protocol-v1${number.asHex}`;
       const keyPairFromPublic = new KeyPair(wallet.publicKey);
       const output = await keyPairFromPublic.encrypt(number); // eslint-disable-line no-await-in-loop
       // Decrypt payload
