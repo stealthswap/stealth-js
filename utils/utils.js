@@ -3,21 +3,21 @@ const ethers = require('ethers');
 const { utils } = ethers;
 const constants = require('../constants.json');
 
-/**
- * @notice Adds leading zeroes to ensure hex strings are the expected length.
- * @dev We always expect a hex value to have the full number of characters for its size,
- * so we use this tool to ensure no errors occur due to wrong hex character lengths.
- * Specifically, we need to pad hex values during the following cases:
- *   1. It seems elliptic strips unnecessary leading zeros when pulling out x and y
- *      coordinates from public keys.
- *   2. When computing a new private key from a random number, the new number (i.e. the new
- *      private key) may not necessarily require all 32-bytes as ethers.js also seems to
- *      strip leading zeroes.
- *   3. When generating random numbers and returning them as hex strings, the leading
- *      zero bytes get stripped
- * @param {String} hex String to pad, without leading 0x
- * @param {String} bytes Number of bytes string should have
- */
+///
+// @notice Pads with leading zeroes to ensure hex strings are the expected length.
+// We always expect a hex value to have the full number of characters for its size,
+// so we use this tool to ensure no errors occur due to wrong hex character lengths.
+// Specifically, we need to pad hex values during the following cases:
+//   1. It seems elliptic strips unnecessary leading zeros when pulling out x and y
+//      coordinates from public keys.
+//   2. When computing a new private key from a random number, the new number (i.e. the new
+//      private key) may not necessarily require all 32-bytes as ethers.js also seems to
+//      strip leading zeroes.
+//   3. When generating random numbers and returning them as hex strings, the leading
+//      zero bytes get stripped
+// @param {String} hex String to pad, without leading 0x
+// @param {String} bytes Number of bytes string should have
+///
 module.exports.padHex = (hex, bytes = 32) => {
   if (!utils.isHexString) throw new Error('Input is not a valid hex string');
   if (hex.slice(0, 2) === '0x') { throw new Error('Input must not contain 0x prefix'); }

@@ -1,11 +1,11 @@
 const ethers = require('ethers');
 
-/**
- * @notice Creates and returns a contract instance
- * @param {String} address contract address
- * @param {*} abi contract ABI
- * @param {*} provider raw web3 provider
- */
+///
+// @notice Creates and returns a contract instance
+// @param {String} address contract address
+// @param {*} abi contract ABI
+// @param {*} provider raw web3 provider
+///
 function createContract(address, abi, provider) {
   let ethersProvider = provider;
   // Convert regular provider to ethers provider
