@@ -114,3 +114,6 @@ dist
 # Secrets
 secrets.json
 .env
+
+# POCs
+poc/

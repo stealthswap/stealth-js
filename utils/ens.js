@@ -55,7 +55,7 @@ async function getBytecode(name, provider) {
 // @desc For a given ENS domain, sets the associated stealthswap signature
 // @param {String} name ENS domain, e.g. myname.eth
 // @param {*} provider raw web3 provider to use (not an ethers instance)
-// @param {String} signature user's signature of the Umbra protocol message
+// @param {String} signature user's signature of the StealthSwap protocol message
 // @returns {String} Transaction hash
 async function setSignature(name, provider, signature) {
   const publicResolver = createContract(ENS_PUBLIC_RESOLVER, publicResolverAbi, provider);
