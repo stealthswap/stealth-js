@@ -6,8 +6,8 @@ const { expect } = chai;
 
 // Ropsten parameters for testing
 const name = 'laguardia.eth';
-const nameSignature = '0x04568fe6a9fc0b57aeebb6a9e6f1da6bcd3ad533d68be61cb13553fdedc133a00bd05ebd6b01931cbb244f822dad3da9890ef95b868750bd9addacf584095dfa1b';
-const namePublicKey = '0x048c7aec5d23b3fe155d81f6ca3b5137f5114e8518e3b9d840d8927dfd50bc3bc74b40663d3d2f2629666613866291f5c4d1c6efb01768a54cbdbfec195e8d529d';
+const nameSignature = '0x65ce8a9e5a725ed0de3e71069d7d807bb918c56a74a1bc35d0832e85cc556edc51cb826d7c8b1ea73bd9226f4adf5d18d8cb7a8b27e2a2563f035497add842df1c';
+const namePublicKey = '0x04bbe5e9d061395a45c4be2f43edb0aafb5e6b7eefbe6c1ace56bf845c80cd282b34852d24ecb8b8311228ac5d8e2f6ba75f93b156c53e8bb8be119356e60df082';
 const nameBytecode = ''; // currently not set
 
 describe('ENS functions', () => {
