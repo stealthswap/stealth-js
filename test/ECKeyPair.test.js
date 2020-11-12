@@ -90,18 +90,18 @@ describe('KeyPair class', () => {
   });
 
   it('supports encryption and decryption of the random number', async () => {
-    for (let i = 0; i < 20; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       // Do a bunch of tests with random wallets and numbers
       wallet = ethers.Wallet.createRandom();
       // Encrypt payload
       const number = new RandomNumber();
       const payload = `stealth-protocol-v1${number.asHex}`;
-      const keyPairFromPublic = new KeyPair(wallet.publicKey);
+      const keyPairFromPublic = new KeyPair(wallet.publicKey); 
       const output = await keyPairFromPublic.encrypt(number); // eslint-disable-line no-await-in-loop
       // Decrypt payload
       const keyPairFromPrivate = new KeyPair(wallet.privateKey);
       const plaintext = await keyPairFromPrivate.decrypt(output); // eslint-disable-line no-await-in-loop
-      expect(plaintext).to.equal(payload);
+      expect(plaintext).to.equal(number.asHex);
     }
   });
 
@@ -147,7 +147,7 @@ describe('KeyPair class', () => {
   it('works for any randomly generated number and wallet', () => {
     /* eslint-disable no-console */
     let numFailures = 0;
-    const numRuns = 1000;
+    const numRuns = 100;
     console.log(`Testing ${numRuns} random numbers and wallets to ensure all pass...`);
     for (let i = 0; i < numRuns; i += 1) {
       if ((i + 1) % 100 === 0) console.log(`Executing run ${i + 1} of ${numRuns}...`);
