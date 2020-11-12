@@ -7,7 +7,7 @@ const publicResolverAbi = require('../abi/PublicResolver.json');
 const { getPublicKeyFromSignature } = require('./utils');
 const { createContract } = require('./contract');
 
-const { ENS_PUBLIC_RESOLVER } = constants;
+const { ENS_PUBLIC_RESOLVER, ENS_TESTNET_RESOLVER } = constants;
 
 // @desc ENS Text record for stealthswap signatures
 const stealthKeySignature = 'vnd.stealth-v0-signature';
