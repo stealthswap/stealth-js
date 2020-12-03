@@ -90,22 +90,19 @@ describe('KeyPair class', () => {
   });
 
   it('supports encryption and decryption of the random number', async () => {
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < 100; i += 1) {
       // Do a bunch of tests with random wallets and numbers
       wallet = ethers.Wallet.createRandom();
       // Encrypt payload
-      const number = new RandomNumber();
-      const payload = `stealth-protocol-v1${number.asHex}`;
+      const number = new RandomNumber(); 
       const keyPairFromPublic = new KeyPair(wallet.publicKey); 
       const output = await keyPairFromPublic.encrypt(number); // eslint-disable-line no-await-in-loop
       // Decrypt payload
-     console.log('Ciphertext', output);
       const keyPairFromPrivate = new KeyPair(wallet.privateKey);
       const plaintext = await keyPairFromPrivate.decrypt(output); // eslint-disable-line no-await-in-loop
       expect(plaintext).to.equal(number.asHex);
     }
-  });
-
+  }); 
   it('lets sender generate stealth receiving address that recipient can access', () => {
     // Generate random number
     const randomNumber = new RandomNumber();
@@ -120,6 +117,19 @@ describe('KeyPair class', () => {
     expect(stealthFromPrivate.publicKeyHex).to.equal(stealthFromPublic.publicKeyHex);
   });
 
+  it('asserts valid stealthaddress derivation', () => {
+    // generate a random number
+    const randomNumber = '0x6e99112f975cdae154a9bbfab8502f0823478142e5e656ab3a5f58012a681160';
+    const receiverPublicKey = '0x04611c4133f6cba43e2f25a2d372bff20fd4e7ab80cfa8ccf485e387108822e13e042f5e5fcd78857f2ce6242902eba6a1d99f17ac5b1cdf3a42613db8bdc0553b';
+    const receiverWallet = new KeyPair(receiverPublicKey);
+    const stealthAddress = receiverWallet.mulPublicKey(randomNumber);
+    const receiverPrivateKey = '0xdafead2ec5a560f20577c9509b5c0459126ec513355894be44f1d6294ec1ce37';
+    const receiverWalletFromPrivate = new KeyPair(receiverPrivateKey);
+    const stealthAddressFromPrivateKey = receiverWalletFromPrivate.mulPrivateKey(randomNumber);
+    console.log(stealthAddress.address);
+    console.log(stealthAddressFromPrivateKey.address);
+    expect(stealthAddress.address).to.equal(stealthAddressFromPrivateKey.address);
+  });
   it('lets multiplication be performed with RandomNumber class or hex string', () => {
     const numRuns = 100;
     for (let i = 0; i < numRuns; i += 1) {
