@@ -4,6 +4,7 @@ const ethers = require('ethers');
 const ensNamehash = require('eth-ens-namehash');
 const constants = require('../constants.json');
 const publicResolverAbi = require('../abi/PublicResolver.json');
+const ensResolverAbi = require('../abi/ensABI.json');
 const { getPublicKeyFromSignature } = require('./utils');
 const { createContract } = require('./contract');
 
@@ -28,7 +29,7 @@ function namehash(name) {
 // @param {String} name ENS domain, e.g. myname.eth
 // @param {*} provider raw web3 provider to use (not an ethers instance)
 async function getSignature(name, provider) {
-  const publicResolver = createContract(ENS_TESTNET_RESOLVER, publicResolverAbi, provider);
+  const publicResolver = createContract(ENS_PUBLIC_RESOLVER, ensResolverAbi, provider);
   const signature = await publicResolver.text(namehash(name), stealthKeySignature);
   return signature;
 }
@@ -47,7 +48,7 @@ async function getPublicKey(name, provider) {
 // @param {String} name ENS domain, e.g. myname.eth
 // @param {*} provider raw web3 provider to use (not an ethers instance)
 async function getBytecode(name, provider) {
-  const publicResolver = createContract(ENS_TESTNET_RESOLVER, publicResolverAbi, provider);
+  const publicResolver = createContract(ENS_PUBLIC_RESOLVER, ensResolverAbi, provider);
   const bytecode = await publicResolver.text(namehash(name), stealthKeyBytecode);
   return bytecode;
 }
@@ -58,7 +59,7 @@ async function getBytecode(name, provider) {
 // @param {String} signature user's signature of the StealthSwap protocol message
 // @returns {String} Transaction hash
 async function setSignature(name, provider, signature) {
-  const publicResolver = createContract(ENS_TESTNET_RESOLVER, publicResolverAbi, provider);
+  const publicResolver = createContract(ENS_PUBLIC_RESOLVER, ensResolverAbi, provider);
   const tx = await publicResolver.setText(namehash(name), stealthKeySignature, signature);
   await tx.wait();
   return tx.hash;
@@ -70,7 +71,7 @@ async function setSignature(name, provider, signature) {
 // @param {String} bytecode contract bytecode to associate with ENS domain
 // @returns {String} Transaction hash
 async function setBytecode(name, provider, bytecode) {
-  const publicResolver = createContract(ENS_TESTNET_RESOLVER, publicResolverAbi, provider);
+  const publicResolver = createContract(ENS_PUBLIC_RESOLVER, ensResolverAbi, provider);
   const node = namehash(name);
   const tx = await publicResolver.setText(node, stealthKeyBytecode, bytecode);
   await tx.wait();
