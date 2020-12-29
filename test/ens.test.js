@@ -1,7 +1,7 @@
 const { provider } = require('@openzeppelin/test-environment');
 const chai = require('chai');
 const ens = require('../utils/ens');
-
+const { ENS_TESTNET_RESOLVER } = require('../constants.json');
 const { expect } = chai;
 
 // Ropsten parameters for testing
@@ -17,12 +17,12 @@ describe('ENS functions', () => {
   });
 
   it('gets the signature associated with an ENS address', async () => {
-    const signature = await ens.getSignature(name, provider);
+    const signature = await ens.getSignature(name, provider, ENS_TESTNET_RESOLVER);
     expect(signature).to.equal(nameSignature);
   });
 
   it('gets the public key associated with an ENS address', async () => {
-    const publicKey = await ens.getPublicKey(name, provider);
+    const publicKey = await ens.getPublicKey(name, provider, ENS_TESTNET_RESOLVER);
     expect(publicKey).to.equal(namePublicKey);
   });
 
@@ -30,8 +30,8 @@ describe('ENS functions', () => {
     // TODO currently fails since provider account is not the msolomon.eth account, so
     // to implement this test we need to have the ganache account register an ENS domain
     const dummySignature = '0x123';
-    await ens.setSignature(name, provider, dummySignature);
-    const signature = await ens.getSignature(name, provider);
+    await ens.setSignature(name, provider, dummySignature, ENS_TESTNET_RESOLVER);
+    const signature = await ens.getSignature(name, provider, ENS_TESTNET_RESOLVER);
     expect(signature).to.equal(dummySignature);
   });
 });

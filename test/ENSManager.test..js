@@ -1,10 +1,11 @@
 const { provider } = require('@openzeppelin/test-environment');
 const chai = require('chai');
 const ENSManager = require('../lib/ENSManager');
+const { ENS_TESTNET_RESOLVER } = require('../constants.json');
 
 const { expect } = chai;
 
-const DomainMan = new ENSManager(provider);
+const DomainMan = new ENSManager(provider, ENS_TESTNET_RESOLVER);
 
 // Truth parameters to test against
 const ensName = 'laguardia.eth';
